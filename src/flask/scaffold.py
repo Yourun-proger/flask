@@ -74,6 +74,9 @@ class Scaffold:
         are relative to. Typically not set, it is discovered based on
         the ``import_name``.
 
+    .. versionchanged:: 2.0.2
+        The ``static_folder``  param can be a ``pathlib.Path`` object.
+
     .. versionadded:: 2.0
     """
 
@@ -92,7 +95,7 @@ class Scaffold:
     def __init__(
         self,
         import_name: str,
-        static_folder: t.Optional[str] = None,
+        static_folder: t.Optional[t.Union[str, os.PathLike]] = None,
         static_url_path: t.Optional[str] = None,
         template_folder: t.Optional[str] = None,
         root_path: t.Optional[str] = None,
@@ -257,7 +260,7 @@ class Scaffold:
             return None
 
     @static_folder.setter
-    def static_folder(self, value: t.Optional[str]) -> None:
+    def static_folder(self, value: t.Optional[t.Union[str, os.PathLike]]) -> None:
         if value is not None:
             value = os.fspath(value).rstrip(r"\/")
 
